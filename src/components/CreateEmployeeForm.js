@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const CreateEmployeeForm = () => {
+const CreateEmployeeForm = (props) => {
+  const { handleSubmit } = props;
   const [input, setInput] = useState({
     firstname: "",
     lastname: "",
@@ -31,13 +32,13 @@ const CreateEmployeeForm = () => {
     });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmitForm = (evt) => {
     evt.preventDefault();
-    console.log(input);
+    handleSubmit(input);
   };
 
   return (
-    <form className="create-employee-form" onSubmit={handleSubmit}>
+    <form className="create-employee-form" onSubmit={handleSubmitForm}>
       <label>
         First Name
         <input
