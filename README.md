@@ -8,6 +8,8 @@ React version of the HRnet app - openclassrooms project
 
 - [Sass](https://www.npmjs.com/package/node-sass) v5.0.0
 
+- [React router](https://reactrouter.com/) v5.2.0
+
 ## Installation Dependencies
 
 - You need Git to clone the repository
