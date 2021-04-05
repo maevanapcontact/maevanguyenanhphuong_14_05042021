@@ -1,6 +1,9 @@
 import React from "react";
 
+import "./CreateEmployee.scss";
+
 import Banner from "./Banner";
+import CreateEmployeeForm from "./CreateEmployeeForm";
 
 const CreateEmployeePage = () => {
   return (
@@ -10,6 +13,7 @@ const CreateEmployeePage = () => {
         linkContent="View Current Employees"
         linkSrc="/employee-list"
       />
+      <CreateEmployeeForm />
     </div>
   );
 };
