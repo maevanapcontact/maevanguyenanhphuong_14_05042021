@@ -7,7 +7,7 @@ import Banner from "./Banner";
 import CreateEmployeeForm from "./CreateEmployeeForm";
 
 const CreateEmployeePage = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, handleOpenModal } = props;
 
   return (
     <div className="create-employee">
@@ -16,13 +16,17 @@ const CreateEmployeePage = (props) => {
         linkContent="View Current Employees"
         linkSrc="/employee-list"
       />
-      <CreateEmployeeForm handleSubmit={handleSubmit} />
+      <CreateEmployeeForm
+        handleSubmit={handleSubmit}
+        handleOpenModal={handleOpenModal}
+      />
     </div>
   );
 };
 
 CreateEmployeePage.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  handleOpenModal: PropTypes.func.isRequired,
 };
 
 export default CreateEmployeePage;

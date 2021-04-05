@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const CreateEmployeeForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, handleOpenModal } = props;
   const [input, setInput] = useState({
     firstname: "",
     lastname: "",
@@ -35,6 +36,7 @@ const CreateEmployeeForm = (props) => {
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
     handleSubmit(input);
+    handleOpenModal();
   };
 
   return (
@@ -181,6 +183,11 @@ const CreateEmployeeForm = (props) => {
       <button type="submit">Save</button>
     </form>
   );
+};
+
+CreateEmployeeForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleOpenModal: PropTypes.func.isRequired,
 };
 
 export default CreateEmployeeForm;
