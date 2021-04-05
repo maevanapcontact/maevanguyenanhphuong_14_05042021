@@ -10,6 +10,8 @@ React version of the HRnet app - openclassrooms project
 
 - [React router](https://reactrouter.com/) v5.2.0
 
+- [Prop-types](https://www.npmjs.com/package/prop-types) v15.7.2
+
 ## Installation Dependencies
 
 - You need Git to clone the repository
