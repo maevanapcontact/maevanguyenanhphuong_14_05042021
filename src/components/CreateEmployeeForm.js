@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { statesUSA } from "../data";
+import { statesUSA, departments } from "../data";
 
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
@@ -96,6 +96,7 @@ const CreateEmployeeForm = (props) => {
             onChange={handleInputChange}
           />
         </label>
+
         <Dropdown
           selectValue={state}
           handleSelectChange={handleInputChange}
@@ -103,6 +104,7 @@ const CreateEmployeeForm = (props) => {
           selectList={statesUSA}
           selectName="state"
         />
+
         <label>
           Zip Code
           <input
@@ -114,20 +116,13 @@ const CreateEmployeeForm = (props) => {
         </label>
       </fieldset>
 
-      <label>
-        Department
-        <select
-          value={department}
-          onChange={handleInputChange}
-          name="department"
-        >
-          <option value="sales">Sales</option>
-          <option value="marketing">Marketing</option>
-          <option value="engineering">Engineering</option>
-          <option value="human resources">Human Resources</option>
-          <option value="legal">Legal</option>
-        </select>
-      </label>
+      <Dropdown
+        selectValue={department}
+        handleSelectChange={handleInputChange}
+        selectLabel="Department"
+        selectList={departments}
+        selectName="department"
+      />
 
       <button type="submit">Save</button>
     </form>

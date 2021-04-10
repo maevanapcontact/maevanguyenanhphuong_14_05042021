@@ -55,3 +55,10 @@ export const statesUSA = [
   { value: "WV", text: "West Virginia" },
   { value: "WY", text: "Wyoming" },
 ];
+
+export const departments = [
+  { value: "sales", text: "Sales" },
+  { value: "engineering", text: "Engineering" },
+  { value: "hr", text: "Human Resources" },
+  { value: "legal", text: "Legal" },
+];
