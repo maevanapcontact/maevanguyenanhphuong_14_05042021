@@ -15,7 +15,7 @@ const CreateEmployeeForm = (props) => {
     start: "2021-01-01",
     street: "",
     city: "",
-    state: "alabama",
+    state: "Alaska",
     zip: 0,
     department: "sales",
   });

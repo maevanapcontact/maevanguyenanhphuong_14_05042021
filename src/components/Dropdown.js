@@ -13,31 +13,44 @@ const Dropdown = (props) => {
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDescendant, setActiveDescendant] = useState(
+    `option-${selectValue}`
+  );
 
   return (
     <div className="dropdown-wrapper">
-      <label htmlFor={`${selectLabel}-btn`} className="dropdown-label">
+      <label htmlFor={`${selectName}-btn`} className="dropdown-label">
         {selectLabel}
       </label>
       <span
         className="dropdown"
-        id={`${selectLabel}-btn`}
+        id={`${selectName}-btn`}
         onClick={() => setIsOpen(!isOpen)}
+        tabIndex="0"
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls={`${selectName}-menu`}
+        aria-activedescendant={activeDescendant}
+        aria-labelledby={activeDescendant}
+        aria-haspopup={true}
       >
         <span>{selectValue}</span>
         <img src="./images/down-arrow.png" alt="" className="dropdown-btn" />
       </span>
       <div className={isOpen ? "dropdown-options active" : "dropdown-options"}>
-        <ul className="dropdown-list">
+        <ul className="dropdown-list" id={`${selectName}-menu`}>
           {selectList.map((elt) => (
             <li
-              key={elt.value}
-              value={elt.value}
+              key={elt.text}
+              value={elt.text}
               onClick={(evt) => {
                 handleSelectChange(selectName, evt.target.innerText);
                 setIsOpen(false);
+                setActiveDescendant(`option-${elt.text}`);
               }}
+              id={`option-${elt.text}`}
               className="dropdown-option"
+              tabIndex="-1"
             >
               {elt.text}
             </li>
