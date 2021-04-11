@@ -1,0 +1,43 @@
+.dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #5b6f0c;
+  border-radius: 5px;
+  padding: 5px 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  &-options {
+    border: 1px solid #5b6f0c;
+    border-radius: 5px;
+    padding: 5px 0 0 0;
+    display: none;
+    position: absolute;
+    background: #fff;
+    z-index: 10;
+    width: 100%;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &-option {
+    padding: 5px 10px;
+
+    &:hover {
+      cursor: pointer;
+      background: #5b6f0c;
+      color: #fff;
+    }
+  }
+}

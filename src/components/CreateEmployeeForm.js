@@ -44,6 +44,13 @@ const CreateEmployeeForm = (props) => {
     handleOpenModal();
   };
 
+  const handleSelect = (name, value) => {
+    setInput({
+      ...input,
+      [name]: value,
+    });
+  };
+
   return (
     <form className="create-employee-form" onSubmit={handleSubmitForm}>
       <label>
@@ -99,7 +106,7 @@ const CreateEmployeeForm = (props) => {
 
         <Dropdown
           selectValue={state}
-          handleSelectChange={handleInputChange}
+          handleSelectChange={handleSelect}
           selectLabel="State"
           selectList={statesUSA}
           selectName="state"
@@ -118,13 +125,15 @@ const CreateEmployeeForm = (props) => {
 
       <Dropdown
         selectValue={department}
-        handleSelectChange={handleInputChange}
+        handleSelectChange={handleSelect}
         selectLabel="Department"
         selectList={departments}
         selectName="department"
       />
 
-      <button type="submit">Save</button>
+      <button type="submit" className="create-employee-form-btn">
+        Save
+      </button>
     </form>
   );
 };
