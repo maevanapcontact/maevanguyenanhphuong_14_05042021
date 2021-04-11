@@ -17,7 +17,7 @@ const CreateEmployeeForm = (props) => {
     city: "",
     state: "Alaska",
     zip: 0,
-    department: "sales",
+    department: "Sales",
   });
   const {
     firstname,
