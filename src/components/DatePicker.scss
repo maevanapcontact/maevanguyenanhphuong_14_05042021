@@ -37,6 +37,63 @@
 
     &-header {
       height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-sub {
+        display: flex;
+        align-items: center;
+      }
+
+      &-btn {
+        border: none;
+        background: none;
+        padding: 5px 10px;
+        margin: 0 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &-select {
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+
+        &-label {
+          padding: 0 10px 0 0;
+          margin: 0 5px;
+
+          & > img {
+            width: 10px;
+            height: auto;
+          }
+        }
+
+        &-options {
+          display: none;
+          position: absolute;
+          background: #fff;
+          border: 1px solid #5b6f0c;
+
+          &.active {
+            display: block;
+          }
+        }
+
+        &-option {
+          padding: 5px 10px;
+          color: #5b6f0c;
+
+          &:hover {
+            background: #5b6f0c;
+            color: #fff;
+          }
+        }
+      }
     }
 
     &-table {
