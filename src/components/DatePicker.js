@@ -5,10 +5,62 @@ import "./DatePicker.scss";
 
 const DatePicker = (props) => {
   const { pickerLabel, pickerName, pickerValue, handlePickerChange } = props;
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const minYear = 1950;
+  const maxYear = 2050;
+  const years = [];
+  for (let i = minYear; i <= maxYear; i++) years.push(i);
+
+  const currentDate = new Date();
+  const currentDayOfWeek = currentDate.getDay();
+  const currentDay = currentDate.getDate();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isMonthOpen, setIsMonthOpen] = useState(false);
   const [isYearOpen, setIsYearOpen] = useState(false);
+
+  const initialDisplayedDateState = {
+    dayOfweek: currentDayOfWeek,
+    day: currentDay,
+    month: currentMonth,
+    year: currentYear,
+  };
+  const [displayedDate] = useState(initialDisplayedDateState);
+  console.log(displayedDate);
+
+  const handleMonthClick = () => {
+    setIsMonthOpen(!isMonthOpen);
+    setIsYearOpen(false);
+  };
+
+  const handleYearClick = () => {
+    setIsYearOpen(!isYearOpen);
+    setIsMonthOpen(false);
+  };
+
+  const handleMonthChange = () => {
+    setIsMonthOpen(false);
+  };
+
+  const handleYearChange = () => {
+    setIsYearOpen(false);
+  };
 
   console.log(pickerName);
   console.log(handlePickerChange);
@@ -35,9 +87,9 @@ const DatePicker = (props) => {
             <div className="picker-elt-header-select">
               <span
                 className="picker-elt-header-select-label"
-                onClick={() => setIsMonthOpen(!isMonthOpen)}
+                onClick={handleMonthClick}
               >
-                April{" "}
+                {`${months[displayedDate.month]} `}
                 <img src="./images/arrow-down.png" alt="extend month list" />
               </span>
               <div
@@ -48,27 +100,24 @@ const DatePicker = (props) => {
                 }
               >
                 <ul>
-                  <li className="picker-elt-header-select-option">January</li>
-                  <li className="picker-elt-header-select-option">February</li>
-                  <li className="picker-elt-header-select-option">March</li>
-                  <li className="picker-elt-header-select-option">April</li>
-                  <li className="picker-elt-header-select-option">May</li>
-                  <li className="picker-elt-header-select-option">June</li>
-                  <li className="picker-elt-header-select-option">July</li>
-                  <li className="picker-elt-header-select-option">August</li>
-                  <li className="picker-elt-header-select-option">September</li>
-                  <li className="picker-elt-header-select-option">October</li>
-                  <li className="picker-elt-header-select-option">November</li>
-                  <li className="picker-elt-header-select-option">December</li>
+                  {months.map((month) => (
+                    <li
+                      key={month}
+                      className="picker-elt-header-select-option"
+                      onClick={handleMonthChange}
+                    >
+                      {month}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
             <div className="picker-elt-header-select">
               <span
                 className="picker-elt-header-select-label"
-                onClick={() => setIsYearOpen(!isYearOpen)}
+                onClick={handleYearClick}
               >
-                2021{" "}
+                {displayedDate.year}
                 <img src="./images/arrow-down.png" alt="extend years list" />
               </span>
               <div
@@ -79,18 +128,15 @@ const DatePicker = (props) => {
                 }
               >
                 <ul>
-                  <li className="picker-elt-header-select-option">2015</li>
-                  <li className="picker-elt-header-select-option">2016</li>
-                  <li className="picker-elt-header-select-option">2017</li>
-                  <li className="picker-elt-header-select-option">2018</li>
-                  <li className="picker-elt-header-select-option">2019</li>
-                  <li className="picker-elt-header-select-option">2020</li>
-                  <li className="picker-elt-header-select-option">2021</li>
-                  <li className="picker-elt-header-select-option">2022</li>
-                  <li className="picker-elt-header-select-option">2023</li>
-                  <li className="picker-elt-header-select-option">2024</li>
-                  <li className="picker-elt-header-select-option">2025</li>
-                  <li className="picker-elt-header-select-option">2026</li>
+                  {years.map((year) => (
+                    <li
+                      key={year}
+                      className="picker-elt-header-select-option"
+                      onClick={handleYearChange}
+                    >
+                      {year}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -103,13 +149,11 @@ const DatePicker = (props) => {
         <table className="picker-elt-table">
           <thead>
             <tr>
-              <th className="picker-elt-table-header-cell">Sun</th>
-              <th className="picker-elt-table-header-cell">Mon</th>
-              <th className="picker-elt-table-header-cell">Tue</th>
-              <th className="picker-elt-table-header-cell">Wed</th>
-              <th className="picker-elt-table-header-cell">Thu</th>
-              <th className="picker-elt-table-header-cell">Fri</th>
-              <th className="picker-elt-table-header-cell">Sat</th>
+              {days.map((day) => (
+                <th key={day} className="picker-elt-table-header-cell">
+                  {day}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>

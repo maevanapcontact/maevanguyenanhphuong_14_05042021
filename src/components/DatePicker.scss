@@ -41,6 +41,11 @@
       justify-content: space-between;
       align-items: center;
 
+      ul {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
       &-sub {
         display: flex;
         align-items: center;
