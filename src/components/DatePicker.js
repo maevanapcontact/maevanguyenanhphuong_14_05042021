@@ -41,7 +41,7 @@ const DatePicker = (props) => {
     month: currentMonth,
     year: currentYear,
   };
-  const [displayedDate] = useState(initialDisplayedDateState);
+  const [displayedDate, setDisplayedDate] = useState(initialDisplayedDateState);
   console.log(displayedDate);
 
   const handleMonthClick = () => {
@@ -62,6 +62,49 @@ const DatePicker = (props) => {
     setIsYearOpen(false);
   };
 
+  const goToCurrentDate = () => {
+    setDisplayedDate({
+      dayOfweek: currentDayOfWeek,
+      day: currentDay,
+      month: currentMonth,
+      year: currentYear,
+    });
+  };
+
+  const goToPreviousMonth = () => {
+    if (displayedDate.month === 0) {
+      if (displayedDate.year > minYear) {
+        setDisplayedDate({
+          ...displayedDate,
+          month: 11,
+          year: displayedDate.year - 1,
+        });
+      }
+    } else {
+      setDisplayedDate({
+        ...displayedDate,
+        month: displayedDate.month - 1,
+      });
+    }
+  };
+
+  const goToNextMonth = () => {
+    if (displayedDate.month === 11) {
+      if (displayedDate.year < maxYear) {
+        setDisplayedDate({
+          ...displayedDate,
+          month: 0,
+          year: displayedDate.year + 1,
+        });
+      }
+    } else {
+      setDisplayedDate({
+        ...displayedDate,
+        month: displayedDate.month + 1,
+      });
+    }
+  };
+
   console.log(pickerName);
   console.log(handlePickerChange);
 
@@ -76,10 +119,18 @@ const DatePicker = (props) => {
       <div className={isOpen ? "picker-elt active" : "picker-elt"}>
         <header className="picker-elt-header">
           <div className="picker-elt-header-sub">
-            <button type="button" className="picker-elt-header-btn">
+            <button
+              type="button"
+              className="picker-elt-header-btn"
+              onClick={goToPreviousMonth}
+            >
               <img src="./images/arrow-left.png" alt="previous month" />
             </button>
-            <button type="button" className="picker-elt-header-btn">
+            <button
+              type="button"
+              className="picker-elt-header-btn"
+              onClick={goToCurrentDate}
+            >
               <img src="./images/home.png" alt="today" />
             </button>
           </div>
@@ -140,7 +191,11 @@ const DatePicker = (props) => {
                 </ul>
               </div>
             </div>
-            <button type="button" className="picker-elt-header-btn">
+            <button
+              type="button"
+              className="picker-elt-header-btn"
+              onClick={goToNextMonth}
+            >
               <img src="./images/arrow-right.png" alt="next month" />
             </button>
           </div>
