@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import "./DatePicker.scss";
 
+import Row from "./Row";
+
 const DatePicker = (props) => {
   const { pickerLabel, pickerName, pickerValue, handlePickerChange } = props;
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -212,51 +214,11 @@ const DatePicker = (props) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-            </tr>
-            <tr>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-            </tr>
-            <tr>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-            </tr>
-            <tr>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-            </tr>
-            <tr>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-              <td className="picker-elt-table-cell"></td>
-            </tr>
+            <Row isFirst />
+            <Row />
+            <Row />
+            <Row />
+            <Row isLast />
           </tbody>
         </table>
       </div>
