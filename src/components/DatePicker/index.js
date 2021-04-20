@@ -215,7 +215,11 @@ const DatePicker = (props) => {
             </tr>
           </thead>
           <tbody>
-            <FirstRow firstDay={refDayOne} />
+            <FirstRow
+              firstDay={refDayOne}
+              currentMonth={displayedDate.month}
+              currentYear={displayedDate.year}
+            />
             <Row start={7 - refDayOne} />
             <Row start={14 - refDayOne} />
             <Row start={21 - refDayOne} />

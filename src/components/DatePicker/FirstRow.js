@@ -1,19 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { generateID } from "../../utils";
+import { generateID, getNbOfDaysInMonth } from "../../utils";
 
 import Cell from "./Cell";
 
-const FirstRow = ({ firstDay }) => {
+const FirstRow = ({ firstDay, currentMonth, currentYear }) => {
   const cells = new Array(7).fill(0);
   let starterCurrent = 0;
+
+  const getPreviousMonthDays = () => {
+    if (currentMonth === 0) {
+      return getNbOfDaysInMonth(11, currentYear - 1);
+    }
+    return getNbOfDaysInMonth(currentMonth - 1, currentYear);
+  };
+
+  let starterPrevious = getPreviousMonthDays() - firstDay;
 
   return (
     <tr>
       {cells.map((cell, index) => {
         if (index < firstDay) {
-          return <Cell key={generateID()} number={0} isCurrent />;
+          starterPrevious++;
+          return <Cell key={generateID()} number={starterPrevious} />;
         }
         starterCurrent++;
         return <Cell key={generateID()} number={starterCurrent} isCurrent />;
@@ -24,6 +34,11 @@ const FirstRow = ({ firstDay }) => {
 
 FirstRow.propTypes = {
   firstDay: PropTypes.number.isRequired,
+  currentMonth: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired,
+  ]),
+  currentYear: PropTypes.number.isRequired,
 };
 
 export default FirstRow;

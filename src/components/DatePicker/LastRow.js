@@ -8,13 +8,15 @@ import Cell from "./Cell";
 const LastRow = ({ start, end }) => {
   const cells = new Array(7).fill(0);
   let starter = start;
+  let sarterNext = 0;
 
   return (
     <tr>
       {cells.map((cell) => {
         starter++;
         if (starter > end) {
-          return <Cell key={generateID()} number={0} isCurrent />;
+          sarterNext++;
+          return <Cell key={generateID()} number={sarterNext} />;
         }
         return <Cell key={generateID()} number={starter} isCurrent />;
       })}
