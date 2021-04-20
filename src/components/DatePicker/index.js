@@ -52,7 +52,11 @@ const DatePicker = (props) => {
     setIsMonthOpen(false);
   };
 
-  const handleYearChange = () => {
+  const handleYearChange = (value) => {
+    setDisplayedDate({
+      ...displayedDate,
+      year: value,
+    });
     setIsYearOpen(false);
   };
 
@@ -177,7 +181,7 @@ const DatePicker = (props) => {
                     <li
                       key={year}
                       className="picker-elt-header-select-option"
-                      onClick={handleYearChange}
+                      onClick={() => handleYearChange(year)}
                     >
                       {year}
                     </li>
