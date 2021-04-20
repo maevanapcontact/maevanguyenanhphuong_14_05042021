@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 import "./DatePicker.scss";
 
+import FirstRow from "./FirstRow";
 import Row from "./Row";
+import LastRow from "./LastRow";
 
 const DatePicker = (props) => {
   const { pickerLabel, pickerName, pickerValue, handlePickerChange } = props;
@@ -106,6 +108,9 @@ const DatePicker = (props) => {
       });
     }
   };
+
+  const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
+  const refDayOne = referenceDate.getDay();
 
   console.log(pickerName);
   console.log(handlePickerChange);
@@ -214,11 +219,11 @@ const DatePicker = (props) => {
             </tr>
           </thead>
           <tbody>
-            <Row isFirst />
-            <Row />
-            <Row />
-            <Row />
-            <Row isLast />
+            <FirstRow firstDay={refDayOne} />
+            <Row start={0} />
+            <Row start={0} />
+            <Row start={0} />
+            <LastRow start={0} />
           </tbody>
         </table>
       </div>
