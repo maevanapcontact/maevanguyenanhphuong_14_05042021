@@ -5,7 +5,7 @@ import { generateID } from "../../utils";
 
 import Cell from "./Cell";
 
-const LastRow = ({ start }) => {
+const LastRow = ({ start, end }) => {
   const cells = new Array(7).fill(0);
   let starter = start;
 
@@ -13,6 +13,9 @@ const LastRow = ({ start }) => {
     <tr>
       {cells.map((cell) => {
         starter++;
+        if (starter > end) {
+          return <Cell key={generateID()} number={0} isCurrent />;
+        }
         return <Cell key={generateID()} number={starter} isCurrent />;
       })}
     </tr>
@@ -21,6 +24,7 @@ const LastRow = ({ start }) => {
 
 LastRow.propTypes = {
   start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
 };
 
 export default LastRow;

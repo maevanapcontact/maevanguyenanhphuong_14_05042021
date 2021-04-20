@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import "./DatePicker.scss";
 import { days, months } from "../../data";
+import { getNbOfDaysInMonth } from "../../utils";
 
 import FirstRow from "./FirstRow";
 import Row from "./Row";
@@ -105,6 +106,10 @@ const DatePicker = (props) => {
 
   const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
   const refDayOne = referenceDate.getDay();
+  const nbDaysCurrent = getNbOfDaysInMonth(
+    displayedDate.month,
+    displayedDate.year
+  );
 
   return (
     <div className="picker-wrapper">
@@ -214,7 +219,14 @@ const DatePicker = (props) => {
             <Row start={7 - refDayOne} />
             <Row start={14 - refDayOne} />
             <Row start={21 - refDayOne} />
-            <LastRow start={28 - refDayOne} />
+            {35 - refDayOne < nbDaysCurrent ? (
+              <>
+                <Row start={28 - refDayOne} />
+                <LastRow start={35 - refDayOne} end={nbDaysCurrent} />
+              </>
+            ) : (
+              <LastRow start={28 - refDayOne} end={nbDaysCurrent} />
+            )}
           </tbody>
         </table>
       </div>
