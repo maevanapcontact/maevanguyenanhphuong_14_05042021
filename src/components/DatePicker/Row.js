@@ -7,12 +7,14 @@ import Cell from "./Cell";
 
 const Row = ({ start }) => {
   const cells = new Array(7).fill(0);
+  let starter = start;
 
   return (
     <tr>
-      {cells.map((cell) => (
-        <Cell key={generateID()} number={0} isCurrent />
-      ))}
+      {cells.map((cell) => {
+        starter++;
+        return <Cell key={generateID()} number={starter} isCurrent />;
+      })}
     </tr>
   );
 };

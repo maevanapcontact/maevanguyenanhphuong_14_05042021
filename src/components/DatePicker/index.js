@@ -2,28 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import "./DatePicker.scss";
+import { days, months } from "../../data";
 
 import FirstRow from "./FirstRow";
 import Row from "./Row";
 import LastRow from "./LastRow";
 
 const DatePicker = (props) => {
-  const { pickerLabel, pickerName, pickerValue, handlePickerChange } = props;
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const { pickerLabel, pickerValue } = props;
+
   const minYear = 1950;
   const maxYear = 2050;
   const years = [];
@@ -46,7 +33,6 @@ const DatePicker = (props) => {
     year: currentYear,
   };
   const [displayedDate, setDisplayedDate] = useState(initialDisplayedDateState);
-  console.log(displayedDate);
 
   const handleMonthClick = () => {
     setIsMonthOpen(!isMonthOpen);
@@ -58,7 +44,11 @@ const DatePicker = (props) => {
     setIsMonthOpen(false);
   };
 
-  const handleMonthChange = () => {
+  const handleMonthChange = (value) => {
+    setDisplayedDate({
+      ...displayedDate,
+      month: value,
+    });
     setIsMonthOpen(false);
   };
 
@@ -112,9 +102,6 @@ const DatePicker = (props) => {
   const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
   const refDayOne = referenceDate.getDay();
 
-  console.log(pickerName);
-  console.log(handlePickerChange);
-
   return (
     <div className="picker-wrapper">
       <label htmlFor="" className="picker-label">
@@ -147,7 +134,7 @@ const DatePicker = (props) => {
                 className="picker-elt-header-select-label"
                 onClick={handleMonthClick}
               >
-                {`${months[displayedDate.month]} `}
+                {`${months[displayedDate.month].text} `}
                 <img src="./images/arrow-down.png" alt="extend month list" />
               </span>
               <div
@@ -160,11 +147,11 @@ const DatePicker = (props) => {
                 <ul>
                   {months.map((month) => (
                     <li
-                      key={month}
+                      key={month.value}
                       className="picker-elt-header-select-option"
-                      onClick={handleMonthChange}
+                      onClick={() => handleMonthChange(month.value)}
                     >
-                      {month}
+                      {month.text}
                     </li>
                   ))}
                 </ul>
@@ -220,10 +207,10 @@ const DatePicker = (props) => {
           </thead>
           <tbody>
             <FirstRow firstDay={refDayOne} />
-            <Row start={0} />
-            <Row start={0} />
-            <Row start={0} />
-            <LastRow start={0} />
+            <Row start={7 - refDayOne} />
+            <Row start={14 - refDayOne} />
+            <Row start={21 - refDayOne} />
+            <LastRow start={28 - refDayOne} />
           </tbody>
         </table>
       </div>
@@ -233,9 +220,9 @@ const DatePicker = (props) => {
 
 DatePicker.propTypes = {
   pickerLabel: PropTypes.string.isRequired,
-  pickerName: PropTypes.string.isRequired,
+  pickerName: PropTypes.string,
   pickerValue: PropTypes.string.isRequired,
-  handlePickerChange: PropTypes.func.isRequired,
+  handlePickerChange: PropTypes.func,
 };
 
 export default DatePicker;
