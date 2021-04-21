@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./Banner.scss";
 
-const Banner = (props) => {
-  const { pageTitle, linkContent, linkSrc } = props;
+const Banner = ({ pageTitle, linkContent, linkSrc }) => {
   return (
     <div className="banner">
       <h1>HRNet</h1>

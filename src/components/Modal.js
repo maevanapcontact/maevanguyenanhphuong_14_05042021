@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Modal.scss";
 
-const Modal = (props) => {
-  const { modalContent, handleClose } = props;
-
+const Modal = ({ modalContent, handleClose }) => {
   return (
     <>
       <div className="modal-overlay" onClick={handleClose}></div>
