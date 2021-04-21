@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { statesUSA, departments } from "../data";
+import { getCurrentDate } from "../utils";
 
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
@@ -16,7 +17,7 @@ const CreateEmployeeForm = ({
     firstname: "",
     lastname: "",
     birth: "1990-01-01",
-    start: "2021-01-01",
+    start: getCurrentDate(),
     street: "",
     city: "",
     state: "Alaska",

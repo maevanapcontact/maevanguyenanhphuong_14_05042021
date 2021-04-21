@@ -107,6 +107,10 @@ const DatePicker = ({
     }
   };
 
+  const onClickCell = () => {
+    handleOpen(pickerName);
+  };
+
   const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
   const refDayOne = referenceDate.getDay();
   const nbDaysCurrent = getNbOfDaysInMonth(
@@ -226,17 +230,26 @@ const DatePicker = ({
               firstDay={refDayOne}
               currentMonth={displayedDate.month}
               currentYear={displayedDate.year}
+              onClickCell={onClickCell}
             />
-            <Row start={7 - refDayOne} />
-            <Row start={14 - refDayOne} />
-            <Row start={21 - refDayOne} />
+            <Row start={7 - refDayOne} onClickCell={onClickCell} />
+            <Row start={14 - refDayOne} onClickCell={onClickCell} />
+            <Row start={21 - refDayOne} onClickCell={onClickCell} />
             {35 - refDayOne < nbDaysCurrent ? (
               <>
-                <Row start={28 - refDayOne} />
-                <LastRow start={35 - refDayOne} end={nbDaysCurrent} />
+                <Row start={28 - refDayOne} onClickCell={onClickCell} />
+                <LastRow
+                  start={35 - refDayOne}
+                  end={nbDaysCurrent}
+                  onClickCell={onClickCell}
+                />
               </>
             ) : (
-              <LastRow start={28 - refDayOne} end={nbDaysCurrent} />
+              <LastRow
+                start={28 - refDayOne}
+                end={nbDaysCurrent}
+                onClickCell={onClickCell}
+              />
             )}
           </tbody>
         </table>

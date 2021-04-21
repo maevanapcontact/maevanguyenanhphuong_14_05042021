@@ -5,7 +5,7 @@ import { generateID, getNbOfDaysInMonth } from "../../utils";
 
 import Cell from "./Cell";
 
-const FirstRow = ({ firstDay, currentMonth, currentYear }) => {
+const FirstRow = ({ firstDay, currentMonth, currentYear, onClickCell }) => {
   const cells = new Array(7).fill(0);
   let starterCurrent = 0;
 
@@ -23,10 +23,23 @@ const FirstRow = ({ firstDay, currentMonth, currentYear }) => {
       {cells.map((cell, index) => {
         if (index < firstDay) {
           starterPrevious++;
-          return <Cell key={generateID()} number={starterPrevious} />;
+          return (
+            <Cell
+              key={generateID()}
+              number={starterPrevious}
+              handleClick={onClickCell}
+            />
+          );
         }
         starterCurrent++;
-        return <Cell key={generateID()} number={starterCurrent} isCurrent />;
+        return (
+          <Cell
+            key={generateID()}
+            number={starterCurrent}
+            isCurrent
+            handleClick={onClickCell}
+          />
+        );
       })}
     </tr>
   );
@@ -39,6 +52,7 @@ FirstRow.propTypes = {
     PropTypes.number.isRequired,
   ]),
   currentYear: PropTypes.number.isRequired,
+  onClickCell: PropTypes.func.isRequired,
 };
 
 export default FirstRow;

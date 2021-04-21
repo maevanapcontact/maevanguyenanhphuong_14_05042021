@@ -42,9 +42,10 @@ const Dropdown = ({
             <li
               key={elt.text}
               value={elt.text}
-              onClick={(evt) => {
-                handleSelectChange(selectName, evt.target.innerText);
+              onClick={() => {
+                handleSelectChange(selectName, elt.text);
                 setActiveDescendant(`option-${elt.text}`);
+                handleOpen(selectName);
               }}
               id={`option-${elt.text}`}
               className="dropdown-option"

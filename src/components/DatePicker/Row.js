@@ -5,7 +5,7 @@ import { generateID } from "../../utils";
 
 import Cell from "./Cell";
 
-const Row = ({ start }) => {
+const Row = ({ start, onClickCell }) => {
   const cells = new Array(7).fill(0);
   let starter = start;
 
@@ -13,7 +13,14 @@ const Row = ({ start }) => {
     <tr>
       {cells.map((cell) => {
         starter++;
-        return <Cell key={generateID()} number={starter} isCurrent />;
+        return (
+          <Cell
+            key={generateID()}
+            number={starter}
+            isCurrent
+            handleClick={onClickCell}
+          />
+        );
       })}
     </tr>
   );
@@ -21,6 +28,7 @@ const Row = ({ start }) => {
 
 Row.propTypes = {
   start: PropTypes.number.isRequired,
+  onClickCell: PropTypes.func.isRequired,
 };
 
 export default Row;
