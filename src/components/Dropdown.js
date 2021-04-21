@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 
 import "./Dropdown.scss";
 
-const Dropdown = (props) => {
-  const {
-    selectValue,
-    handleSelectChange,
-    selectLabel,
-    selectList,
-    selectName,
-  } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
+const Dropdown = ({
+  selectValue,
+  handleSelectChange,
+  selectLabel,
+  selectList,
+  selectName,
+  isOpen,
+  handleOpen,
+}) => {
   const [activeDescendant, setActiveDescendant] = useState(
     `option-${selectValue}`
   );
@@ -25,7 +24,7 @@ const Dropdown = (props) => {
       <span
         className="dropdown"
         id={`${selectName}-btn`}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => handleOpen(selectName)}
         tabIndex="0"
         role="combobox"
         aria-expanded={isOpen}
@@ -45,7 +44,6 @@ const Dropdown = (props) => {
               value={elt.text}
               onClick={(evt) => {
                 handleSelectChange(selectName, evt.target.innerText);
-                setIsOpen(false);
                 setActiveDescendant(`option-${elt.text}`);
               }}
               id={`option-${elt.text}`}
@@ -67,6 +65,8 @@ Dropdown.propTypes = {
   selectLabel: PropTypes.string.isRequired,
   selectList: PropTypes.array.isRequired,
   selectName: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 export default Dropdown;

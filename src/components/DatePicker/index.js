@@ -9,9 +9,13 @@ import FirstRow from "./FirstRow";
 import Row from "./Row";
 import LastRow from "./LastRow";
 
-const DatePicker = (props) => {
-  const { pickerLabel, pickerValue } = props;
-
+const DatePicker = ({
+  pickerLabel,
+  pickerValue,
+  isOpen,
+  handleOpen,
+  pickerName,
+}) => {
   const minYear = 1950;
   const maxYear = 2050;
   const years = [];
@@ -23,7 +27,6 @@ const DatePicker = (props) => {
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [isMonthOpen, setIsMonthOpen] = useState(false);
   const [isYearOpen, setIsYearOpen] = useState(false);
 
@@ -116,7 +119,11 @@ const DatePicker = (props) => {
       <label htmlFor="" className="picker-label">
         {pickerLabel}
       </label>
-      <span className="picker" id="picker" onClick={() => setIsOpen(!isOpen)}>
+      <span
+        className="picker"
+        id="picker"
+        onClick={() => handleOpen(pickerName)}
+      >
         {pickerValue}
       </span>
       <div className={isOpen ? "picker-elt active" : "picker-elt"}>
@@ -243,6 +250,8 @@ DatePicker.propTypes = {
   pickerName: PropTypes.string,
   pickerValue: PropTypes.string.isRequired,
   handlePickerChange: PropTypes.func,
+  isOpen: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 export default DatePicker;

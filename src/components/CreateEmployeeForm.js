@@ -6,8 +6,12 @@ import { statesUSA, departments } from "../data";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
 
-const CreateEmployeeForm = (props) => {
-  const { handleSubmit, handleOpenModal } = props;
+const CreateEmployeeForm = ({
+  handleSubmit,
+  handleOpenModal,
+  openedElts,
+  handleElementsOpening,
+}) => {
   const [input, setInput] = useState({
     firstname: "",
     lastname: "",
@@ -16,20 +20,9 @@ const CreateEmployeeForm = (props) => {
     street: "",
     city: "",
     state: "Alaska",
-    zip: 0,
+    zipCode: 0,
     department: "Sales",
   });
-  const {
-    firstname,
-    lastname,
-    birth,
-    start,
-    street,
-    city,
-    state,
-    zip,
-    department,
-  } = input;
 
   const handleInputChange = (evt) => {
     setInput({
@@ -58,7 +51,7 @@ const CreateEmployeeForm = (props) => {
         <input
           type="text"
           name="firstname"
-          value={firstname}
+          value={input.firstname}
           onChange={handleInputChange}
         />
       </label>
@@ -67,21 +60,25 @@ const CreateEmployeeForm = (props) => {
         <input
           type="text"
           name="lastname"
-          value={lastname}
+          value={input.lastname}
           onChange={handleInputChange}
         />
       </label>
       <DatePicker
         pickerLabel="Date of Birth"
         pickerName="birth"
-        pickerValue={birth}
+        pickerValue={input.birth}
         handlePickerChange={handleInputChange}
+        isOpen={openedElts.birth}
+        handleOpen={handleElementsOpening}
       />
       <DatePicker
         pickerLabel="Start Date"
         pickerName="start"
-        pickerValue={start}
+        pickerValue={input.start}
         handlePickerChange={handleInputChange}
+        isOpen={openedElts.start}
+        handleOpen={handleElementsOpening}
       />
       <fieldset>
         <legend>Address</legend>
@@ -90,7 +87,7 @@ const CreateEmployeeForm = (props) => {
           <input
             type="text"
             name="street"
-            value={street}
+            value={input.street}
             onChange={handleInputChange}
           />
         </label>
@@ -99,36 +96,40 @@ const CreateEmployeeForm = (props) => {
           <input
             type="text"
             name="city"
-            value={city}
+            value={input.city}
             onChange={handleInputChange}
           />
         </label>
 
         <Dropdown
-          selectValue={state}
+          selectValue={input.state}
           handleSelectChange={handleSelect}
           selectLabel="State"
           selectList={statesUSA}
           selectName="state"
+          isOpen={openedElts.state}
+          handleOpen={handleElementsOpening}
         />
 
         <label>
           Zip Code
           <input
             type="number"
-            name="zip"
-            value={zip}
+            name="zipCode"
+            value={input.zipCode}
             onChange={handleInputChange}
           />
         </label>
       </fieldset>
 
       <Dropdown
-        selectValue={department}
+        selectValue={input.department}
         handleSelectChange={handleSelect}
         selectLabel="Department"
         selectList={departments}
         selectName="department"
+        isOpen={openedElts.department}
+        handleOpen={handleElementsOpening}
       />
 
       <button type="submit" className="create-employee-form-btn">
@@ -141,6 +142,8 @@ const CreateEmployeeForm = (props) => {
 CreateEmployeeForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleOpenModal: PropTypes.func.isRequired,
+  openedElts: PropTypes.object.isRequired,
+  handleElementsOpening: PropTypes.func.isRequired,
 };
 
 export default CreateEmployeeForm;
