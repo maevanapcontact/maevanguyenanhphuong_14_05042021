@@ -5,7 +5,7 @@ import { generateID } from "../../utils";
 
 import Cell from "./Cell";
 
-const LastRow = ({ start, end, onClickCell }) => {
+const LastRow = ({ start, end, onClickCell, currentMonth, currentYear }) => {
   const cells = new Array(7).fill(0);
   let starter = start;
   let sarterNext = 0;
@@ -21,6 +21,9 @@ const LastRow = ({ start, end, onClickCell }) => {
               key={generateID()}
               number={sarterNext}
               handleClick={onClickCell}
+              currentMonth={currentMonth}
+              currentYear={currentYear}
+              isNext
             />
           );
         }
@@ -30,6 +33,8 @@ const LastRow = ({ start, end, onClickCell }) => {
             number={starter}
             isCurrent
             handleClick={onClickCell}
+            currentMonth={currentMonth}
+            currentYear={currentYear}
           />
         );
       })}
@@ -40,6 +45,8 @@ const LastRow = ({ start, end, onClickCell }) => {
 LastRow.propTypes = {
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
+  currentMonth: PropTypes.number.isRequired,
+  currentYear: PropTypes.number.isRequired,
   onClickCell: PropTypes.func.isRequired,
 };
 

@@ -28,6 +28,9 @@ const FirstRow = ({ firstDay, currentMonth, currentYear, onClickCell }) => {
               key={generateID()}
               number={starterPrevious}
               handleClick={onClickCell}
+              currentMonth={currentMonth}
+              currentYear={currentYear}
+              isPrevious
             />
           );
         }
@@ -38,6 +41,8 @@ const FirstRow = ({ firstDay, currentMonth, currentYear, onClickCell }) => {
             number={starterCurrent}
             isCurrent
             handleClick={onClickCell}
+            currentMonth={currentMonth}
+            currentYear={currentYear}
           />
         );
       })}

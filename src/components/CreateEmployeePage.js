@@ -7,21 +7,17 @@ import Banner from "./Banner";
 import CreateEmployeeForm from "./CreateEmployeeForm";
 
 const CreateEmployeePage = ({ handleSubmit, handleOpenModal }) => {
-  const [isOverlayActive, setIsOverlayActive] = useState(false);
-  const [openedElts, setOpenElts] = useState({
+  const initialState = {
     birth: false,
     start: false,
     state: false,
     department: false,
-  });
+  };
+  const [isOverlayActive, setIsOverlayActive] = useState(false);
+  const [openedElts, setOpenElts] = useState(initialState);
 
   const closeAllElements = () => {
-    setOpenElts({
-      birth: false,
-      start: false,
-      state: false,
-      department: false,
-    });
+    setOpenElts(initialState);
     setIsOverlayActive(false);
   };
 

@@ -38,7 +38,7 @@ const CreateEmployeeForm = ({
     handleOpenModal();
   };
 
-  const handleSelect = (name, value) => {
+  const handleCustomInputChange = (name, value) => {
     setInput({
       ...input,
       [name]: value,
@@ -69,7 +69,7 @@ const CreateEmployeeForm = ({
         pickerLabel="Date of Birth"
         pickerName="birth"
         pickerValue={input.birth}
-        handlePickerChange={handleInputChange}
+        handleChange={handleCustomInputChange}
         isOpen={openedElts.birth}
         handleOpen={handleElementsOpening}
       />
@@ -77,7 +77,7 @@ const CreateEmployeeForm = ({
         pickerLabel="Start Date"
         pickerName="start"
         pickerValue={input.start}
-        handlePickerChange={handleInputChange}
+        handleChange={handleCustomInputChange}
         isOpen={openedElts.start}
         handleOpen={handleElementsOpening}
       />
@@ -104,7 +104,7 @@ const CreateEmployeeForm = ({
 
         <Dropdown
           selectValue={input.state}
-          handleSelectChange={handleSelect}
+          handleSelectChange={handleCustomInputChange}
           selectLabel="State"
           selectList={statesUSA}
           selectName="state"
@@ -125,7 +125,7 @@ const CreateEmployeeForm = ({
 
       <Dropdown
         selectValue={input.department}
-        handleSelectChange={handleSelect}
+        handleSelectChange={handleCustomInputChange}
         selectLabel="Department"
         selectList={departments}
         selectName="department"

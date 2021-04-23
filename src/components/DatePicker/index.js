@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 
 import "./DatePicker.scss";
 import { days, months } from "../../data";
-import { getNbOfDaysInMonth } from "../../utils";
+import {
+  getNbOfDaysInMonth,
+  getMinYear,
+  getMaxYear,
+  getRangeOfYears,
+  getFormattedDate,
+} from "../../utils";
 
 import FirstRow from "./FirstRow";
 import Row from "./Row";
@@ -15,11 +21,11 @@ const DatePicker = ({
   isOpen,
   handleOpen,
   pickerName,
+  handleChange,
 }) => {
-  const minYear = 1950;
-  const maxYear = 2050;
-  const years = [];
-  for (let i = minYear; i <= maxYear; i++) years.push(i);
+  const minYear = getMinYear();
+  const maxYear = getMaxYear();
+  const years = getRangeOfYears();
 
   const currentDate = new Date();
   const currentDayOfWeek = currentDate.getDay();
@@ -29,14 +35,19 @@ const DatePicker = ({
 
   const [isMonthOpen, setIsMonthOpen] = useState(false);
   const [isYearOpen, setIsYearOpen] = useState(false);
-
-  const initialDisplayedDateState = {
+  const [displayedDate, setDisplayedDate] = useState({
     dayOfweek: currentDayOfWeek,
     day: currentDay,
     month: currentMonth,
     year: currentYear,
-  };
-  const [displayedDate, setDisplayedDate] = useState(initialDisplayedDateState);
+  });
+
+  const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
+  const refDayOne = referenceDate.getDay();
+  const nbDaysCurrent = getNbOfDaysInMonth(
+    displayedDate.month,
+    displayedDate.year
+  );
 
   const handleMonthClick = () => {
     setIsMonthOpen(!isMonthOpen);
@@ -51,7 +62,7 @@ const DatePicker = ({
   const handleMonthChange = (value) => {
     setDisplayedDate({
       ...displayedDate,
-      month: value,
+      month: parseInt(value),
     });
     setIsMonthOpen(false);
   };
@@ -59,7 +70,7 @@ const DatePicker = ({
   const handleYearChange = (value) => {
     setDisplayedDate({
       ...displayedDate,
-      year: value,
+      year: parseInt(value),
     });
     setIsYearOpen(false);
   };
@@ -107,16 +118,11 @@ const DatePicker = ({
     }
   };
 
-  const onClickCell = () => {
+  const onClickCell = (year, month, day) => {
+    const value = getFormattedDate(year, month, day);
+    handleChange(pickerName, value);
     handleOpen(pickerName);
   };
-
-  const referenceDate = new Date(displayedDate.year, displayedDate.month, 1);
-  const refDayOne = referenceDate.getDay();
-  const nbDaysCurrent = getNbOfDaysInMonth(
-    displayedDate.month,
-    displayedDate.year
-  );
 
   return (
     <div className="picker-wrapper">
@@ -232,16 +238,38 @@ const DatePicker = ({
               currentYear={displayedDate.year}
               onClickCell={onClickCell}
             />
-            <Row start={7 - refDayOne} onClickCell={onClickCell} />
-            <Row start={14 - refDayOne} onClickCell={onClickCell} />
-            <Row start={21 - refDayOne} onClickCell={onClickCell} />
+            <Row
+              start={7 - refDayOne}
+              onClickCell={onClickCell}
+              currentMonth={displayedDate.month}
+              currentYear={displayedDate.year}
+            />
+            <Row
+              start={14 - refDayOne}
+              onClickCell={onClickCell}
+              currentMonth={displayedDate.month}
+              currentYear={displayedDate.year}
+            />
+            <Row
+              start={21 - refDayOne}
+              onClickCell={onClickCell}
+              currentMonth={displayedDate.month}
+              currentYear={displayedDate.year}
+            />
             {35 - refDayOne < nbDaysCurrent ? (
               <>
-                <Row start={28 - refDayOne} onClickCell={onClickCell} />
+                <Row
+                  start={28 - refDayOne}
+                  onClickCell={onClickCell}
+                  currentMonth={displayedDate.month}
+                  currentYear={displayedDate.year}
+                />
                 <LastRow
                   start={35 - refDayOne}
                   end={nbDaysCurrent}
                   onClickCell={onClickCell}
+                  currentMonth={displayedDate.month}
+                  currentYear={displayedDate.year}
                 />
               </>
             ) : (
@@ -249,6 +277,8 @@ const DatePicker = ({
                 start={28 - refDayOne}
                 end={nbDaysCurrent}
                 onClickCell={onClickCell}
+                currentMonth={displayedDate.month}
+                currentYear={displayedDate.year}
               />
             )}
           </tbody>
@@ -262,7 +292,7 @@ DatePicker.propTypes = {
   pickerLabel: PropTypes.string.isRequired,
   pickerName: PropTypes.string,
   pickerValue: PropTypes.string.isRequired,
-  handlePickerChange: PropTypes.func,
+  handleChange: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,
 };
