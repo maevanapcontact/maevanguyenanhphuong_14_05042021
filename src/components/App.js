@@ -11,6 +11,8 @@ const App = () => {
   const [employees, setEmployees] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log(employees);
+
   const createEmployee = (newEmployee) => {
     setEmployees([
       ...employees,
