@@ -13,7 +13,7 @@ const Dropdown = ({
   handleOpen,
 }) => {
   const [activeDescendant, setActiveDescendant] = useState(
-    `option-${selectValue}`
+    `option-${selectValue.text}`
   );
 
   return (
@@ -33,17 +33,17 @@ const Dropdown = ({
         aria-labelledby={activeDescendant}
         aria-haspopup={true}
       >
-        <span>{selectValue}</span>
+        <span>{selectValue.text}</span>
         <img src="./images/down-arrow.png" alt="" className="dropdown-btn" />
       </span>
       <div className={isOpen ? "dropdown-options active" : "dropdown-options"}>
         <ul className="dropdown-list" id={`${selectName}-menu`}>
           {selectList.map((elt) => (
             <li
-              key={elt.text}
-              value={elt.text}
+              key={elt.value}
+              value={elt}
               onClick={() => {
-                handleSelectChange(selectName, elt.text);
+                handleSelectChange(selectName, elt);
                 setActiveDescendant(`option-${elt.text}`);
                 handleOpen(selectName);
               }}
@@ -61,7 +61,7 @@ const Dropdown = ({
 };
 
 Dropdown.propTypes = {
-  selectValue: PropTypes.string.isRequired,
+  selectValue: PropTypes.object.isRequired,
   handleSelectChange: PropTypes.func.isRequired,
   selectLabel: PropTypes.string.isRequired,
   selectList: PropTypes.array.isRequired,

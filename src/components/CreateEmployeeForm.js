@@ -20,9 +20,9 @@ const CreateEmployeeForm = ({
     start: getCurrentDate(),
     street: "",
     city: "",
-    state: "Alaska",
-    zipCode: 0,
-    department: "Sales",
+    state: statesUSA[0],
+    zipCode: "",
+    department: departments[0],
   });
 
   const handleInputChange = (evt) => {
