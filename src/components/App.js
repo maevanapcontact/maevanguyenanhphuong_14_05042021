@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { generateID } from "../utils";
-
 import CreateEmployeePage from "./CreateEmployeePage";
 import CurrentEmployeesPage from "./CurrentEmployeesPage";
 import Modal from "./Modal";
@@ -14,13 +12,7 @@ const App = () => {
   console.log(employees);
 
   const createEmployee = (newEmployee) => {
-    setEmployees([
-      ...employees,
-      {
-        id: generateID(),
-        ...newEmployee,
-      },
-    ]);
+    setEmployees([...employees, newEmployee]);
   };
 
   const handleOpenModal = () => {
