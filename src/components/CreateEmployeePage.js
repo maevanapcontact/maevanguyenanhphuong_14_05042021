@@ -42,7 +42,7 @@ const CreateEmployeePage = ({ handleSubmit, handleOpenModal }) => {
       <Banner
         pageTitle="Create Employee"
         linkContent="View Current Employees"
-        linkSrc="/employee-list"
+        linkSrc="/p14-react/employee-list"
       />
       <CreateEmployeeForm
         handleSubmit={handleSubmit}

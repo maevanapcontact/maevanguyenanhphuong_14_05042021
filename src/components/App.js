@@ -9,8 +9,6 @@ const App = () => {
   const [employees, setEmployees] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(employees);
-
   const createEmployee = (newEmployee) => {
     setEmployees([...employees, newEmployee]);
   };
@@ -32,13 +30,13 @@ const App = () => {
         />
       )}
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/p14-react/">
           <CreateEmployeePage
             handleSubmit={createEmployee}
             handleOpenModal={handleOpenModal}
           />
         </Route>
-        <Route path="/employee-list">
+        <Route path="/p14-react/employee-list">
           <CurrentEmployeesPage employeesList={employees} />
         </Route>
       </Switch>

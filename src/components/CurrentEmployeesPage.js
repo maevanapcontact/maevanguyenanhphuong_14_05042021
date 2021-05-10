@@ -16,7 +16,11 @@ const CurrentEmployeesPage = ({ employeesList }) => {
 
   return (
     <div className="current-employees">
-      <Banner pageTitle="Current Employees" linkContent="Home" linkSrc="/" />
+      <Banner
+        pageTitle="Current Employees"
+        linkContent="Home"
+        linkSrc="/p14-react/"
+      />
       <DataTables labels={labels} data={employeesData} />
     </div>
   );
